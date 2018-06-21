@@ -12,8 +12,8 @@ weeks.
 """
 from __future__ import print_function
 
-# Matplotlib setup                                                                                                                                              
-# Use Agg backend for command-line (non-interactive) operation                                                                                                   
+# Matplotlib setup
+# Use Agg backend for command-line (non-interactive) operation
 import matplotlib
 matplotlib.use('Agg')
 
@@ -28,12 +28,12 @@ import os
 
 model_path = os.path.abspath(os.path.dirname(__file__))
 
-VALIDATION_LIMITS = {'1DPAMZT': [(1, 2.0), (50, 1.0), (99, 2.0)],
+validation_limits = {'1DPAMZT': [(1, 2.0), (50, 1.0), (99, 2.0)],
                      'PITCH': [(1, 3.0), (99, 3.0)],
                      'TSCPOS': [(1, 2.5), (99, 2.5)]
                      }
 
-HIST_LIMIT = [20.]
+hist_limit = [20.]
 
 def calc_model(model_spec, states, start, stop, T_dpa=None, T_dpa_times=None,
                dh_heater=None, dh_heater_times=None):
@@ -53,8 +53,8 @@ def calc_model(model_spec, states, start, stop, T_dpa=None, T_dpa_times=None,
 
 def main():
     args = get_options("dpa", model_path)
-    dpa_check = ACISThermalCheck("1dpamzt", "dpa", VALIDATION_LIMITS,
-                                 HIST_LIMIT, calc_model, args)
+    dpa_check = ACISThermalCheck("1dpamzt", "dpa", validation_limits,
+                                 hist_limit, calc_model, args)
     try:
         dpa_check.run()
     except Exception as msg:
